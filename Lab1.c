@@ -1,5 +1,5 @@
 /* Implementation of different operations related to stack
-*/
+
 
 #include<stdio.h>
 #define MAXSIZE 5
@@ -69,4 +69,97 @@ int isFull(){
 }
 int isEmpty(){
     return (top == -1) ? 1 : 0;
+}
+
+*/
+
+//Implementation of different operations related to linear queue
+
+#include<stdio.h>
+#include<stdbool.h>
+#define MAX_SIZE 5
+
+//structure to represent a linear queue
+struct linearQueue{
+    int queue[MAX_SIZE];
+    int front, rear;
+    };
+//Function to check if the queue is empty
+bool isEmpty(struct linearQueue *q){
+    return q->front==-1;
+}
+//Function to check if the queue is full
+bool isFull(struct linearQueue *q){
+    return ((q->rear + 1)%MAX_SIZE==q->front);
+}
+//function to enqueue an element into the queue
+void enqueue(struct linearQueue* q, int x){
+    //If the queue is already full then print "Overflow"
+    if(isFull(q)){
+        printf("Queue is full. Cannot enqueue %d\n",x);
+        return ;
+    }
+    //Insert at the end of the queue and increment the rear index
+    if(isEmpty(q)){
+        q->front=q->rear=0;
+    }else{
+        q->rear=(q->rear+1)%MAX_SIZE;
+    }
+    q->queue[q->rear]=x;
+}
+
+//Function to dequeue an element from the queue
+int dequeue(struct linearQueue *q){
+    if(isEmpty(q)){
+        printf("Queue is empty. Cannot dequeue\n");
+        return -1; //return a sentinel value to indicate failure
+    }
+    int x=q->queue[q->front];
+    if(q->front==q->rear){
+        //The queue has only one element
+        q->front=q->rear=-1;
+    }else{
+        q->front=(q->front+1)%MAX_SIZE;
+    }
+    return x;
+}
+//function to display the elements of the queue
+void display(struct linearQueue *q){
+    if(isEmpty(q)){
+        printf("Queue is empty.\n");
+        return;
+    }
+    int i=q->front;
+
+    do{
+        printf("%d ",q->queue[i]);
+        i=(i+1)%MAX_SIZE;
+        }while(i!=(q->rear+1)%MAX_SIZE);
+
+    
+    printf("\n");
+}
+int main(){
+    struct linearQueue queue;
+    queue.front=queue.rear=-1;
+
+    //Enqueue some elements
+    enqueue(&queue,1);
+    enqueue(&queue,2);
+    enqueue(&queue,3);
+    enqueue(&queue,4);
+    enqueue(&queue,5);
+    //Display the elements in the queue
+    printf("Queue:");
+    display(&queue);
+
+    //Dequeue some elements
+    int x1=dequeue(&queue);
+    int x2=dequeue(&queue);
+
+    printf("Dequeued:%d,%d\n",x1,x2);
+
+    printf("Queue after dequeue:");
+    display(&queue);
+    return 0;
 }
