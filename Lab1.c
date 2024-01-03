@@ -164,7 +164,6 @@ int main(){
     return 0;
 }
 
-*/
 
 //Implement the solution of TOH and Fibonacci Series using Recursion
 
@@ -184,4 +183,24 @@ int main(){
     int n=3;
     towerOfHanoi(n,'A','B','C');
     return 0;
+}
+*/
+//Fibonacci series using recursion
+ 
+#include<stdio.h>
+int fibonacci(int n){
+    if(n<=1){
+        return n;
+    }
+    return (fibonacci(n-1) + fibonacci(n-2));
+}
+int main(){
+    int num=7;
+    printf("fibonacci series:\n");
+    for(int i=0;i<num;i++){
+        printf("%d ",fibonacci(i));
+    }
+    printf("\n");
+    return 0;
+
 }
