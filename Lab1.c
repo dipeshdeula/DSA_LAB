@@ -72,6 +72,8 @@ int isEmpty(){
 }
 
 */
+/*
+
 
 //Implementation of different operations related to linear queue
 
@@ -163,3 +165,5 @@ int main(){
     display(&queue);
     return 0;
 }
+
+*/
